@@ -1,8 +1,27 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
-    // TODO: Add a listener for click events on the save button. This code should
+
+
+var saveBtn = document.getElementById("btn")
+
+function readDescriptionFromStorage() {
+  var description = localStorage.getElementById("description");
+  if (description) {
+    description = JSON.parse(description);
+  } else {
+    description = [];
+  }
+  return description;
+};
+
+function saveDescriptionsToStorage(description) {
+    localStorage.setItem('description', JSON.stringify(description));
+    console.log("saved!")
+  };
+
+
+// TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
     // function? How can DOM traversal be used to get the "hour-x" id of the
@@ -20,4 +39,5 @@ $(function () {
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
-  });
+
+saveBtn.addEventListener("click", saveDescriptionsToStorage(description))
